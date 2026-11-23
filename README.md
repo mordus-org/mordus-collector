@@ -62,8 +62,6 @@ const monitor = createMonitor({
 });
 ```
 
-Os testes unitários usam Node.js, os testes de interação isolada usam jsdom e as jornadas usam Chromium via Playwright. Os contratos negativos em `*.test-d.ts` são verificados por `npm run typecheck`.
-
 ## Contratos
 
 `MonitorConfig` descreve projeto, endpoint e opções de captura/transporte. O núcleo valida a configuração e cria uma cópia imutável. Os valores padrão são `data-monitor`, todas as opções de captura habilitadas e transporte com lotes de 20 eventos, intervalo de 5000 ms e limite de 1000 eventos. O transporte padrão aplica esses limites ao envio HTTP em lotes.
@@ -98,12 +96,6 @@ Os descritores de elemento incluem apenas identificador lógico, caminho de iden
 Campos de texto geram `field.change` ao confirmar a alteração ou sair do campo, sem evento por tecla. Seleções em `select`, checkbox e radio geram `field.selection`. Formulários identificados geram `form.submit` e `form.reset` nas ações correspondentes. O coletor de campos ignora password, hidden, file, controles com nomes ou identificadores de token e segredo, e regiões `contenteditable`. A coleta de formulários descreve apenas a ação sem consultar valores de campos, inclusive quando o formulário contém um campo sensível. Campos e formulários sem identificação elegível ou dentro de `data-monitor-ignore` são descartados.
 
 As regras de resolução, contextos aninhados e limites de Shadow DOM e iframes estão em [Identificação de elementos](docs/identificacao-de-elementos.md).
-
-## Versionamento
-
-O pacote adota SemVer. Enquanto a versão principal for zero, mudanças incompatíveis de API incrementam a versão menor. A partir de 1.0.0, incrementam a versão principal. Correções compatíveis incrementam patch e adições compatíveis incrementam minor.
-
-O schema tem versão independente, inicialmente `SCHEMA_VERSION = 1`. Campos opcionais adicionais preservam essa versão. Remover ou renomear campos, alterar seus tipos ou significado, tornar campos obrigatórios e ampliar categorias/tipos fechados exigem incrementar `schemaVersion` e atualizar os consumidores antes da coleta. Alterações incompatíveis de API ou schema devem ser registradas no changelog de release e em commits com `!` e rodapé `BREAKING CHANGE:`.
 
 ### Navegação
 

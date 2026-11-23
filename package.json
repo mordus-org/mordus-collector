@@ -27,6 +27,7 @@
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "example": "npm run build && node scripts/serve-example.mjs",
+    "example:shopping": "npm run build && node scripts/serve-shopping.mjs",
     "prepack": "npm run build"
   },
   "engines": {

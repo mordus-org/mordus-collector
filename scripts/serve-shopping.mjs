@@ -69,5 +69,10 @@ if (
   process.argv[1] &&
   import.meta.url === new URL(`file://${process.argv[1]}`).href
 ) {
-  createShoppingServer().listen(4174, '127.0.0.1');
+  const PORT = 4174;
+  createShoppingServer()
+    .listen(PORT, '127.0.0.1')
+    .on('listening', () =>
+      console.log(`Server started and page served at 127.0.0.1:${PORT}`),
+    );
 }
