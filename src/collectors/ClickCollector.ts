@@ -1,0 +1,47 @@
+import { DelegatedDomCollector } from '@/collectors/DelegatedDomCollector';
+import { ElementResolver } from '@/identification/ElementResolver';
+import type { Collector } from '@/types/collector';
+import type { RawMonitorEvent } from '@/types/events';
+import type { EventPipeline } from '@/types/pipeline';
+
+export interface ClickCollectorOptions {
+  document: Document;
+  pipeline: EventPipeline;
+  attribute?: string;
+}
+
+export class ClickCollector implements Collector {
+  private readonly delegate: DelegatedDomCollector;
+
+  constructor(options: ClickCollectorOptions) {
+    const resolver = new ElementResolver(options.attribute);
+
+    this.delegate = new DelegatedDomCollector({
+      document: options.document,
+      eventType: 'click',
+      pipeline: options.pipeline,
+      resolve: (event): RawMonitorEvent | null => {
+        const element = resolver.resolve(event);
+
+        if (!element) {
+          return null;
+        }
+
+        return {
+          category: 'element',
+          type: 'element.click',
+          source: 'auto',
+          element,
+        };
+      },
+    });
+  }
+
+  start(): void {
+    this.delegate.start();
+  }
+
+  stop(): void {
+    this.delegate.stop();
+  }
+}

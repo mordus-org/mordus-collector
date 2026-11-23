@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Loja de exemplo — Argus</title>
+    <script type="importmap">
+      { "imports": { "@argus/monitor": "/dist/index.js" } }
+    </script>
+  </head>
+  <body>
+    <nav><button data-monitor="shop.home" id="home">Início</button></nav>
+    <main id="app"></main>
+    <section data-monitor-ignore>
+      <button data-monitor="shop.ignored" id="ignored">Área ignorada</button>
+    </section>
+    <script type="module" src="/shopping-app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Argus — exemplo HTML</title>
+    <script type="importmap">
+      { "imports": { "@argus/monitor": "/dist/index.js" } }
+    </script>
+  </head>
+  <body>
+    <h1>Argus — exemplo HTML</h1>
+    <p id="status" role="status">Carregando pacote…</p>
+    <label for="name">Nome de exemplo</label>
+    <input id="name" data-monitor="example.name" autocomplete="off" />
+    <button type="button" data-monitor="example.action">Ação de exemplo</button>
+    <button type="button" data-monitor="example.icon">
+      <span data-testid="inner-icon">Ícone interno</span>
+    </button>
+    <a href="#next" data-monitor="example.link">Link de exemplo</a>
+    <section data-monitor-ignore>
+      <button type="button" data-monitor="example.ignored">
+        Área ignorada
+      </button>
+    </section>
+    <div id="dynamic-root"></div>
+    <form id="profile-form" data-monitor="profile.form">
+      <label for="display-name">Nome exibido</label>
+      <input id="display-name" data-monitor="profile.name" />
+      <label for="password">Senha</label>
+      <input id="password" type="password" data-monitor="profile.password" />
+      <label for="access-token">Token</label>
+      <input
+        id="access-token"
+        name="access_token"
+        data-monitor="profile.token"
+      />
+      <label for="plan">Plano</label>
+      <select id="plan" data-monitor="profile.plan">
+        <option value="basic">Básico</option>
+        <option value="pro">Profissional</option>
+      </select>
+      <label for="updates">Atualizações</label>
+      <input id="updates" type="checkbox" data-monitor="profile.updates" />
+      <label for="contact-email">Contato por e-mail</label>
+      <input
+        id="contact-email"
+        name="contact"
+        type="radio"
+        data-monitor="profile.contact-email"
+      />
+      <button type="submit">Salvar perfil</button>
+      <button type="reset">Limpar perfil</button>
+    </form>
+    <script type="module">
+      import { createMonitor, Monitor, SCHEMA_VERSION } from '@argus/monitor';
+
+      const monitor = createMonitor({
+        projectId: 'vanilla-app',
+        endpoint: '/api/monitor/events',
+      });
+
+      if (monitor instanceof Monitor) {
+        document.querySelector('#status').textContent =
+          `Monitor criado para ${monitor.config.projectId} — schema ${SCHEMA_VERSION}`;
+      }
+
+      document
+        .querySelector('#profile-form')
+        .addEventListener('submit', (event) => event.preventDefault());
+
+      window.clickEvents = [];
+      window.monitorEvents = window.clickEvents;
+      window.clickMonitor = createMonitor(
+        {
+          projectId: 'vanilla-app',
+          endpoint: '/api/monitor/events',
+          collectionEnabled: true,
+          capture: { clicks: true, fields: true, forms: true },
+        },
+        {
+          transport: {
+            emit(event) {
+              window.clickEvents.push(event);
+            },
+            async flush() {},
+          },
+        },
+      );
+      window.clickMonitor.start();
+    </script>
+  </body>
+</html>
