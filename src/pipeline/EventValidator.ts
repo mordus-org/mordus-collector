@@ -1,6 +1,6 @@
-import { isContextIdentifier } from '@/context/SessionManager';
-import { AUTOMATIC_EVENT_TYPES, SCHEMA_VERSION } from '@/types/events';
-import type { MonitorEvent } from '@/types/events';
+import { isContextIdentifier } from '../context/SessionManager.js';
+import { AUTOMATIC_EVENT_TYPES, SCHEMA_VERSION } from '../types/events.js';
+import type { MonitorEvent } from '../types/events.js';
 
 export const MAX_EVENT_BYTES = 16384;
 

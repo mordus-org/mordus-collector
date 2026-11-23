@@ -1,9 +1,9 @@
-import { SCHEMA_VERSION } from '@/types/events';
+import { SCHEMA_VERSION } from '../types/events.js';
 import type {
   MonitorEvent,
   PageContext,
   RawMonitorEvent,
-} from '@/types/events';
+} from '../types/events.js';
 
 interface EventFactoryOptions {
   projectId: string;

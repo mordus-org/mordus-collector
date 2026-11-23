@@ -1,8 +1,8 @@
-import { DelegatedDomCollector } from '@/collectors/DelegatedDomCollector';
-import { ElementResolver } from '@/identification/ElementResolver';
-import type { Collector } from '@/types/collector';
-import type { RawMonitorEvent } from '@/types/events';
-import type { EventPipeline } from '@/types/pipeline';
+import { DelegatedDomCollector } from './DelegatedDomCollector.js';
+import { ElementResolver } from '../identification/ElementResolver.js';
+import type { Collector } from '../types/collector.js';
+import type { RawMonitorEvent } from '../types/events.js';
+import type { EventPipeline } from '../types/pipeline.js';
 
 export interface ClickCollectorOptions {
   document: Document;

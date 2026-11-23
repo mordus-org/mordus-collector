@@ -1,5 +1,8 @@
 export type DeliveryResult =
-  'delivered' | 'transient' | 'permanent' | 'cancelled';
+  | 'delivered'
+  | 'transient'
+  | 'permanent'
+  | 'cancelled';
 
 export class HttpTransport {
   constructor(

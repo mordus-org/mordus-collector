@@ -1,6 +1,6 @@
-import type { Collector } from '@/types/collector';
-import type { RawMonitorEvent } from '@/types/events';
-import type { EventPipeline } from '@/types/pipeline';
+import type { Collector } from '../types/collector.js';
+import type { RawMonitorEvent } from '../types/events.js';
+import type { EventPipeline } from '../types/pipeline.js';
 
 export interface DelegatedDomCollectorOptions {
   document: Document;

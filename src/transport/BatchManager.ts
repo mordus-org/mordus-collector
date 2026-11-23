@@ -1,7 +1,7 @@
-import { EventQueue } from '@/transport/EventQueue';
-import { HttpTransport } from '@/transport/HttpTransport';
-import type { MonitorEvent } from '@/types/events';
-import type { MonitorTransport } from '@/types/monitor';
+import { EventQueue } from './EventQueue.js';
+import { HttpTransport } from './HttpTransport.js';
+import type { MonitorEvent } from '../types/events.js';
+import type { MonitorTransport } from '../types/monitor.js';
 
 export interface BatchManagerOptions {
   endpoint: string;

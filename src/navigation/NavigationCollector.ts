@@ -1,8 +1,8 @@
-import { observeHistory } from '@/navigation/HistoryObserver';
-import { PageManager } from '@/navigation/PageManager';
-import type { Collector } from '@/types/collector';
-import type { NavigationType } from '@/types/events';
-import type { EventPipeline } from '@/types/pipeline';
+import { observeHistory } from './HistoryObserver.js';
+import { PageManager } from './PageManager.js';
+import type { Collector } from '../types/collector.js';
+import type { NavigationType } from '../types/events.js';
+import type { EventPipeline } from '../types/pipeline.js';
 
 interface NavigationCollectorOptions {
   window: Window;

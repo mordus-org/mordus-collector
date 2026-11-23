@@ -2,7 +2,7 @@ import type {
   CaptureOptions,
   MonitorConfig,
   ResolvedMonitorConfig,
-} from '@/types/config';
+} from '../types/config.js';
 
 const CAPTURE_FEATURES = [
   'clicks',

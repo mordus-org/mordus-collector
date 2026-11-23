@@ -1,6 +1,9 @@
-import { normalizeErrorName, readDataProperty } from '@/pipeline/PrivacyFilter';
-import type { Collector } from '@/types/collector';
-import type { EventPipeline } from '@/types/pipeline';
+import {
+  normalizeErrorName,
+  readDataProperty,
+} from '../pipeline/PrivacyFilter.js';
+import type { Collector } from '../types/collector.js';
+import type { EventPipeline } from '../types/pipeline.js';
 
 interface ErrorCollectorOptions {
   window: Window;

@@ -1,4 +1,4 @@
-import type { NavigationType, PageContext } from '@/types/events';
+import type { NavigationType, PageContext } from '../types/events.js';
 
 export function sanitizePath(value: string): string {
   try {

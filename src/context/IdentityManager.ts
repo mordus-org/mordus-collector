@@ -1,4 +1,4 @@
-import { isContextIdentifier } from '@/context/SessionManager';
+import { isContextIdentifier } from './SessionManager.js';
 
 export class IdentityManager {
   #identity: string | undefined;

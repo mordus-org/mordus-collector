@@ -1,4 +1,4 @@
-import type { MonitorEvent, RawMonitorEvent } from '@/types/events';
+import type { MonitorEvent, RawMonitorEvent } from './events.js';
 
 export interface EventPipeline {
   process(event: RawMonitorEvent): void;

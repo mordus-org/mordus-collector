@@ -1,4 +1,4 @@
-import type { ElementDescriptor } from '@/types/events';
+import type { ElementDescriptor } from '../types/events.js';
 
 export class ElementResolver {
   constructor(private readonly attribute = 'data-monitor') {}

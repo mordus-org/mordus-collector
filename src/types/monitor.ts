@@ -1,10 +1,14 @@
-import type { TransportStatistics } from '@/transport/BatchManager';
-import type { Collector } from '@/types/collector';
-import type { CaptureOptions } from '@/types/config';
-import type { EventPipeline, EventSink } from '@/types/pipeline';
+import type { TransportStatistics } from '../transport/BatchManager.js';
+import type { Collector } from './collector.js';
+import type { CaptureOptions } from './config.js';
+import type { EventPipeline, EventSink } from './pipeline.js';
 
 export type MonitorState =
-  'idle' | 'starting' | 'running' | 'stopping' | 'stopped';
+  | 'idle'
+  | 'starting'
+  | 'running'
+  | 'stopping'
+  | 'stopped';
 
 export interface CollectorRegistration {
   name: string;

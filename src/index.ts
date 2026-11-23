@@ -1,16 +1,16 @@
-export { createMonitor, Monitor } from '@/core/Monitor';
-export type { Collector } from '@/types/collector';
+export { createMonitor, Monitor } from './core/Monitor.js';
+export type { Collector } from './types/collector.js';
 export type {
   CaptureOptions,
   MonitorConfig,
   ResolvedMonitorConfig,
   TransportOptions,
-} from '@/types/config';
+} from './types/config.js';
 export {
   AUTOMATIC_EVENT_TYPES,
   EVENT_CATEGORIES,
   SCHEMA_VERSION,
-} from '@/types/events';
+} from './types/events.js';
 export type {
   AutomaticEventType,
   ElementDescriptor,
@@ -20,16 +20,19 @@ export type {
   NavigationType,
   PageContext,
   RawMonitorEvent,
-} from '@/types/events';
-export type { EventPipeline, EventSink } from '@/types/pipeline';
+} from './types/events.js';
+export type { EventPipeline, EventSink } from './types/pipeline.js';
 export type {
   CollectorRegistration,
   MonitorDependencies,
   MonitorState,
   MonitorTransport,
-} from '@/types/monitor';
-export { ElementResolver } from '@/identification/ElementResolver';
+} from './types/monitor.js';
+export { ElementResolver } from './identification/ElementResolver.js';
 
-export type { DiscardCode, PipelineDiagnostics } from '@/pipeline/Diagnostics';
+export type {
+  DiscardCode,
+  PipelineDiagnostics,
+} from './pipeline/Diagnostics.js';
 
-export type { TransportStatistics } from '@/transport/BatchManager';
+export type { TransportStatistics } from './transport/BatchManager.js';

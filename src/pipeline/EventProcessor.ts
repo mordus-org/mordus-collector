@@ -2,21 +2,17 @@ import {
   filterMetadata,
   filterErrorMetadata,
   readDataProperty,
-} from '@/pipeline/PrivacyFilter';
-import { copyPage } from '@/navigation/PageManager';
-import { EventFactory } from '@/pipeline/EventFactory';
-import {
-  copyJson,
-  EventValidator,
-  isEventKind,
-} from '@/pipeline/EventValidator';
-import { Diagnostics } from '@/pipeline/Diagnostics';
+} from './PrivacyFilter.js';
+import { copyPage } from '../navigation/PageManager.js';
+import { EventFactory } from './EventFactory.js';
+import { copyJson, EventValidator, isEventKind } from './EventValidator.js';
+import { Diagnostics } from './Diagnostics.js';
 import type {
   ElementDescriptor,
   PageContext,
   RawMonitorEvent,
-} from '@/types/events';
-import type { EventPipeline, EventSink } from '@/types/pipeline';
+} from '../types/events.js';
+import type { EventPipeline, EventSink } from '../types/pipeline.js';
 
 interface EventProcessorOptions {
   projectId: string;

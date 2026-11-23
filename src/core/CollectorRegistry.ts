@@ -1,6 +1,6 @@
-import type { Collector } from '@/types/collector';
-import type { CollectorRegistration } from '@/types/monitor';
-import type { EventPipeline } from '@/types/pipeline';
+import type { Collector } from '../types/collector.js';
+import type { CollectorRegistration } from '../types/monitor.js';
+import type { EventPipeline } from '../types/pipeline.js';
 
 export class CollectorRegistry {
   private readonly active = new Set<Collector>();

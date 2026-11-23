@@ -1,4 +1,4 @@
-import { sanitizePath } from '@/navigation/PageManager';
+import { sanitizePath } from '../navigation/PageManager.js';
 
 export const METADATA_LIMITS = {
   depth: 4,

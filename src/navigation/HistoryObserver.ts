@@ -1,5 +1,5 @@
-import { sanitizePath } from '@/navigation/PageManager';
-import type { NavigationType } from '@/types/events';
+import { sanitizePath } from './PageManager.js';
+import type { NavigationType } from '../types/events.js';
 
 type Listener = (path: string, type: NavigationType) => void;
 interface Hub {

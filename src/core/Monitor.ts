@@ -1,26 +1,26 @@
-import { BatchManager } from '@/transport/BatchManager';
-import type { TransportStatistics } from '@/transport/BatchManager';
-import { Diagnostics } from '@/pipeline/Diagnostics';
-import type { PipelineDiagnostics } from '@/pipeline/Diagnostics';
-import { ErrorCollector } from '@/collectors/ErrorCollector';
-import { IdentityManager } from '@/context/IdentityManager';
-import { SessionManager } from '@/context/SessionManager';
-import { NavigationCollector } from '@/navigation/NavigationCollector';
-import { PageManager } from '@/navigation/PageManager';
-import { CollectorRegistry } from '@/core/CollectorRegistry';
-import { ClickCollector } from '@/collectors/ClickCollector';
-import { FieldCollector } from '@/collectors/FieldCollector';
-import { FormCollector } from '@/collectors/FormCollector';
-import { resolveConfiguration } from '@/core/Configuration';
-import { EventProcessor } from '@/pipeline/EventProcessor';
-import type { MonitorConfig, ResolvedMonitorConfig } from '@/types/config';
+import { BatchManager } from '../transport/BatchManager.js';
+import type { TransportStatistics } from '../transport/BatchManager.js';
+import { Diagnostics } from '../pipeline/Diagnostics.js';
+import type { PipelineDiagnostics } from '../pipeline/Diagnostics.js';
+import { ErrorCollector } from '../collectors/ErrorCollector.js';
+import { IdentityManager } from '../context/IdentityManager.js';
+import { SessionManager } from '../context/SessionManager.js';
+import { NavigationCollector } from '../navigation/NavigationCollector.js';
+import { PageManager } from '../navigation/PageManager.js';
+import { CollectorRegistry } from './CollectorRegistry.js';
+import { ClickCollector } from '../collectors/ClickCollector.js';
+import { FieldCollector } from '../collectors/FieldCollector.js';
+import { FormCollector } from '../collectors/FormCollector.js';
+import { resolveConfiguration } from './Configuration.js';
+import { EventProcessor } from '../pipeline/EventProcessor.js';
+import type { MonitorConfig, ResolvedMonitorConfig } from '../types/config.js';
 import type {
   CollectorRegistration,
   MonitorDependencies,
   MonitorState,
   MonitorTransport,
-} from '@/types/monitor';
-import type { EventPipeline } from '@/types/pipeline';
+} from '../types/monitor.js';
+import type { EventPipeline } from '../types/pipeline.js';
 
 export class Monitor {
   readonly config: ResolvedMonitorConfig;
