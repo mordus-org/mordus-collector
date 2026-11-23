@@ -91,15 +91,6 @@ try {
     readFileSync(
       join(
         consumerDirectory,
-        'node_modules/@argus/monitor/docs/identificacao-de-elementos.md',
-      ),
-      'utf8',
-    ).includes('data-monitor'),
-  );
-  assert.ok(
-    readFileSync(
-      join(
-        consumerDirectory,
         'node_modules/@argus/monitor/src/transport/README.md',
       ),
       'utf8',

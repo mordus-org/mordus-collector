@@ -1,0 +1,78 @@
+name: Prepare Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: New stable package version, without the v prefix
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: prepare-release-${{ inputs.version }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Validate version and refs
+        env:
+          VERSION: ${{ inputs.version }}
+        shell: bash
+        run: |
+          if [[ ! "$VERSION" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            echo "Version must be stable SemVer X.Y.Z without a v prefix" >&2
+            exit 1
+          fi
+          current=$(node -p 'require("./package.json").version')
+          if [[ "$VERSION" == "$current" ]]; then
+            echo "Version $VERSION is already current" >&2
+            exit 1
+          fi
+          if [[ "$(printf '%s\n%s\n' "$current" "$VERSION" | sort -V | tail -n1)" != "$VERSION" ]]; then
+            echo "Version $VERSION must be newer than current version $current" >&2
+            exit 1
+          fi
+          if git show-ref --verify --quiet "refs/tags/v$VERSION"; then
+            echo "Tag v$VERSION already exists" >&2
+            exit 1
+          fi
+          if git show-ref --verify --quiet "refs/remotes/origin/chore/release-v$VERSION"; then
+            echo "Branch chore/release-v$VERSION already exists" >&2
+            exit 1
+          fi
+
+      - name: Update package version
+        env:
+          VERSION: ${{ inputs.version }}
+        run: npm version "$VERSION" --no-git-tag-version
+
+      - name: Create release pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ inputs.version }}
+        shell: bash
+        run: |
+          branch="chore/release-v$VERSION"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git switch -c "$branch"
+          git add package.json package-lock.json
+          git commit -m "chore(release): v$VERSION"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" --title "chore: release v$VERSION" --body "Prepare npm release v$VERSION. After merging, publish the matching GitHub Release to publish the package."
