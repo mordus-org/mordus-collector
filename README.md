@@ -34,6 +34,14 @@ Marque controles elegíveis com `data-monitor="identificador.estavel"` e regiõe
 
 O SDK omite valores digitados, texto e HTML dos eventos automáticos. Metadados manuais passam por limites e filtros, mas a integração deve enviar apenas códigos sem dados pessoais. A revogação descarta a fila local e aborta tentativas pendentes. Uma requisição já recebida pelo servidor pode ter sido processada. Erros 4xx permanentes encerram o lote, enquanto falhas transitórias recebem retentativas limitadas. `monitor.diagnostics` informa contagens e códigos de descarte sem incluir conteúdo dos eventos.
 
+## Releases
+
+Para preparar uma release, habilite **Allow GitHub Actions to create and approve pull requests** nas configurações de Actions do repositório. Execute `Prepare Release` manualmente a partir de `main` e informe a próxima versão estável `X.Y.Z`, sem prefixo `v`. O workflow valida que a versão é SemVer válida, maior que a versão atual e que não existem a tag `vX.Y.Z` nem a branch `chore/release-vX.Y.Z`. Em seguida atualiza `package.json` e `package-lock.json`, cria a branch e abre uma PR para `main`.
+
+Depois do merge, crie uma GitHub Release com a tag `vX.Y.Z` apontando para o commit correspondente em `main` e revise suas notas antes de publicá-la. O workflow `Publish Release` valida a tag, a versão do pacote e a ancestralidade do commit, instala Chromium e executa `npm run test:distribution` antes de publicar no npm via Trusted Publishing. Se o workflow falhar, abra a execução associada ao evento `release.published` e use **Re-run failed jobs**. Uma versão já publicada é reconhecida e ignorada com sucesso. Respostas do registro diferentes de 200 ou 404 interrompem a publicação.
+
+Na estreia, publique `0.1.0` uma vez no npm usando 2FA, crie a GitHub Release `v0.1.0` no commit correspondente em `main` e configure `release.yml` como Trusted Publisher de `@argus/monitor`, habilitando publicação direta. O primeiro publish pela CI deve ocorrer em até dois dias após configurar o Trusted Publisher.
+
 ## Desenvolvimento
 
 Use Node.js 22.12 ou superior da série 22, ou Node.js 24 ou superior.
