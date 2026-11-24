@@ -1,9 +1,9 @@
 {
-  "name": "@argus/monitor",
+  "name": "@mordus/monitor",
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/joaolucenalima/argus-monitor.git"
+    "url": "https://github.com/mordus-org/mordus-collector.git"
   },
   "publishConfig": {
     "access": "public"

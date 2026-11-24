@@ -16,7 +16,7 @@ import { createServer } from 'node:http';
 import { chromium } from '@playwright/test';
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
-const temporaryDirectory = mkdtempSync(join(tmpdir(), 'argus-distribution-'));
+const temporaryDirectory = mkdtempSync(join(tmpdir(), 'mordus-distribution-'));
 const consumerDirectory = join(temporaryDirectory, 'consumer');
 const npmCli = process.env.npm_execpath;
 
@@ -60,7 +60,7 @@ try {
   writeFileSync(
     join(consumerDirectory, 'package.json'),
     JSON.stringify({
-      name: 'argus-consumer-test',
+      name: 'mordus-consumer-test',
       private: true,
       type: 'module',
     }),
@@ -80,18 +80,18 @@ try {
 
   const installedPackage = JSON.parse(
     readFileSync(
-      join(consumerDirectory, 'node_modules/@argus/monitor/package.json'),
+      join(consumerDirectory, 'node_modules/@mordus/monitor/package.json'),
       'utf8',
     ),
   );
 
-  assert.equal(installedPackage.name, '@argus/monitor');
+  assert.equal(installedPackage.name, '@mordus/monitor');
   assert.equal(Object.keys(installedPackage.dependencies ?? {}).length, 0);
   assert.ok(
     readFileSync(
       join(
         consumerDirectory,
-        'node_modules/@argus/monitor/src/transport/README.md',
+        'node_modules/@mordus/monitor/src/transport/README.md',
       ),
       'utf8',
     ).includes('events'),
@@ -100,7 +100,7 @@ try {
     readFileSync(
       join(
         consumerDirectory,
-        'node_modules/@argus/monitor/examples/shopping-app/index.html',
+        'node_modules/@mordus/monitor/examples/shopping-app/index.html',
       ),
       'utf8',
     ).includes('shop.home'),
@@ -108,8 +108,8 @@ try {
 
   writeFileSync(
     join(consumerDirectory, 'consumer.ts'),
-    `import { createMonitor, SCHEMA_VERSION } from '@argus/monitor';
-import type { MonitorConfig, MonitorEvent } from '@argus/monitor';
+    `import { createMonitor, SCHEMA_VERSION } from '@mordus/monitor';
+import type { MonitorConfig, MonitorEvent } from '@mordus/monitor';
 
 const config: MonitorConfig = {
   projectId: 'distribution-test',
@@ -152,14 +152,14 @@ void eventVersion;
     [
       '--input-type=module',
       '--eval',
-      "import { createMonitor, SCHEMA_VERSION } from '@argus/monitor'; if (SCHEMA_VERSION !== 1 || !createMonitor({ projectId: 'distribution-test', endpoint: '/events' })) process.exit(1);",
+      "import { createMonitor, SCHEMA_VERSION } from '@mordus/monitor'; if (SCHEMA_VERSION !== 1 || !createMonitor({ projectId: 'distribution-test', endpoint: '/events' })) process.exit(1);",
     ],
     { cwd: consumerDirectory, stdio: 'inherit' },
   );
 
   const receivedEvents = [];
   const installedBundle = readFileSync(
-    join(consumerDirectory, 'node_modules/@argus/monitor/dist/index.js'),
+    join(consumerDirectory, 'node_modules/@mordus/monitor/dist/index.js'),
   );
   const server = createServer(async (request, response) => {
     if (request.url === '/sdk.js') {
@@ -183,11 +183,11 @@ void eventVersion;
 
     response.setHeader('Content-Type', 'text/html');
     response.end(`<!doctype html>
-<html><head><script type="importmap">{"imports":{"@argus/monitor":"/sdk.js"}}</script></head>
+<html><head><script type="importmap">{"imports":{"@mordus/monitor":"/sdk.js"}}</script></head>
 <body><button id="action" data-monitor="distribution.action">Action</button>
 <form id="form" data-monitor="distribution.form"><input id="field" data-monitor="distribution.field"><button type="submit">Submit</button></form>
 <script type="module">
-import { createMonitor } from '@argus/monitor';
+import { createMonitor } from '@mordus/monitor';
 window.monitor = createMonitor({ projectId: 'distribution-test', endpoint: '/events', collectionEnabled: true, transport: { batchSize: 1 } });
 document.querySelector('#form').addEventListener('submit', event => event.preventDefault());
 await window.monitor.start();

@@ -31,5 +31,5 @@ const server = createServer(async (request, response) => {
 });
 
 server.listen(4173, '127.0.0.1', () => {
-  console.log('Argus example at http://127.0.0.1:4173');
+  console.log('Mordus example at http://127.0.0.1:4173');
 });

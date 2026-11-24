@@ -2,7 +2,7 @@ import type { NavigationType, PageContext } from '../types/events.js';
 
 export function sanitizePath(value: string): string {
   try {
-    const url = new URL(value, 'https://argus.invalid');
+    const url = new URL(value, 'https://mordus.invalid');
     const pathname = sanitizeSegments(url.pathname);
     const hash = url.hash.startsWith('#/')
       ? `#${sanitizeSegments(url.hash.slice(1).split('?')[0] ?? '/')}`

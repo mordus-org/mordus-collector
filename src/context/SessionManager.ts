@@ -32,7 +32,7 @@ export class SessionManager {
       return shared;
     }
 
-    const key = `argus.session.${projectId}`;
+    const key = `mordus.session.${projectId}`;
     let stored: string | null = null;
 
     try {

@@ -32,7 +32,7 @@ describe('session context', () => {
 
   it('regenerates invalid stored IDs even when removal fails', () => {
     const window = fakeWindow(
-      new Map([['argus.session.project', 'person@example.test']]),
+      new Map([['mordus.session.project', 'person@example.test']]),
     );
     vi.mocked(window.sessionStorage.removeItem).mockImplementation(() => {
       throw new Error();
@@ -68,9 +68,9 @@ describe('session context', () => {
 
   it('separates a cloned opener session and preserves it on child reload', () => {
     const opener = fakeWindow(
-      new Map([['argus.session.project', 'parent-session']]),
+      new Map([['mordus.session.project', 'parent-session']]),
     );
-    const storage = new Map([['argus.session.project', 'parent-session']]);
+    const storage = new Map([['mordus.session.project', 'parent-session']]);
     const child = fakeWindow(storage);
     Object.assign(child, { opener });
     expect(session(child, 'project', 'child-session').getId()).toBe(

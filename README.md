@@ -1,4 +1,4 @@
-# Argus
+# Mordus
 
 SDK de monitoramento para aplicações web, em TypeScript e independente de frameworks.
 
@@ -9,13 +9,13 @@ O SDK oferece contratos, configuração validada e ciclo de vida (`start`, `stop
 Instale o pacote em uma aplicação com Node.js 22.12+ ou 24+ durante o desenvolvimento. O código distribuído é ESM, inclui declarações TypeScript e não requer dependências de runtime.
 
 ```sh
-npm install @argus/monitor
+npm install @mordus/monitor
 ```
 
 Depois de confirmar a finalidade e a base legal aplicável, habilite a coleta. Quando a base for consentimento, chame `start()` somente após obtê-lo.
 
 ```ts
-import { createMonitor } from '@argus/monitor';
+import { createMonitor } from '@mordus/monitor';
 
 const monitor = createMonitor({
   projectId: 'my-app',
@@ -40,7 +40,7 @@ Para preparar uma release, habilite **Allow GitHub Actions to create and approve
 
 Depois do merge, crie uma GitHub Release com a tag `vX.Y.Z` apontando para o commit correspondente em `main` e revise suas notas antes de publicá-la. O workflow `Publish Release` valida a tag, a versão do pacote e a ancestralidade do commit, instala Chromium e executa `npm run test:distribution` antes de publicar no npm via Trusted Publishing. Se o workflow falhar, abra a execução associada ao evento `release.published` e use **Re-run failed jobs**. Uma versão já publicada é reconhecida e ignorada com sucesso. Respostas do registro diferentes de 200 ou 404 interrompem a publicação.
 
-Na estreia, publique `0.1.0` uma vez no npm usando 2FA, crie a GitHub Release `v0.1.0` no commit correspondente em `main` e configure `release.yml` como Trusted Publisher de `@argus/monitor`, habilitando publicação direta. O primeiro publish pela CI deve ocorrer em até dois dias após configurar o Trusted Publisher.
+Na estreia, publique `0.1.0` uma vez no npm usando 2FA, crie a GitHub Release `v0.1.0` no commit correspondente em `main` e configure `release.yml` como Trusted Publisher de `@mordus/monitor`, habilitando publicação direta. O primeiro publish pela CI deve ocorrer em até dois dias após configurar o Trusted Publisher.
 
 ## Desenvolvimento
 
@@ -59,10 +59,10 @@ npm run test:e2e
 npm run example
 ```
 
-O exemplo fica em `http://127.0.0.1:4173`. O import map aponta o nome público `@argus/monitor` ao bundle ESM construído em `dist/`. O runtime não exige dependências externas.
+O exemplo fica em `http://127.0.0.1:4173`. O import map aponta o nome público `@mordus/monitor` ao bundle ESM construído em `dist/`. O runtime não exige dependências externas.
 
 ```ts
-import { createMonitor } from '@argus/monitor';
+import { createMonitor } from '@mordus/monitor';
 
 const monitor = createMonitor({
   projectId: 'my-app',

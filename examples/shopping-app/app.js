@@ -1,5 +1,5 @@
 /* global document, window, history, location, performance */
-import { createMonitor } from '@argus/monitor';
+import { createMonitor } from '@mordus/monitor';
 
 const app = document.querySelector('#app');
 const monitor = createMonitor({

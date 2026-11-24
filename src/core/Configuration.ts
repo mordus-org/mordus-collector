@@ -56,7 +56,7 @@ export function resolveConfiguration(
   let endpoint: URL;
 
   try {
-    endpoint = new URL(config.endpoint, 'https://argus.invalid');
+    endpoint = new URL(config.endpoint, 'https://mordus.invalid');
   } catch {
     throw new TypeError(
       'endpoint must be an HTTP(S) URL or a root-relative path.',
